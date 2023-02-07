@@ -4,7 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.ws.rs.QueryParam;
 import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.service.TodoListService;
 
@@ -20,7 +20,7 @@ public class TodoListResource {
   @GET
   @Path("/add")
   @Produces("application/json")
-  public TaskDto addTask(@RequestParam(name = "task", defaultValue = "") String taskName) {
+  public TaskDto addTask(@QueryParam(value = "task") String taskName) {
     return todoListService.add(taskName);
   }
 
