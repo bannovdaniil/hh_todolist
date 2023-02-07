@@ -3,15 +3,12 @@ package ru.hh.todolist.resource;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import org.springframework.context.annotation.Import;
+import jakarta.ws.rs.Produces;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.service.TodoListService;
 
 @Path("/api/v1")
-@Import({
-    TodoListService.class
-})
 public class TodoListResource {
   private final TodoListService todoListService;
 
@@ -22,7 +19,8 @@ public class TodoListResource {
 
   @GET
   @Path("/add")
-  public TaskDto addTask(@RequestParam String taskName) {
+  @Produces("application/json")
+  public TaskDto addTask(@RequestParam(name = "task", defaultValue = "") String taskName) {
     return todoListService.add(taskName);
   }
 
