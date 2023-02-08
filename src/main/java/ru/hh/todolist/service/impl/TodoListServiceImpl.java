@@ -33,6 +33,7 @@ public class TodoListServiceImpl implements TodoListService {
       LOGGER.error("Task parameter is Blank or Null");
       throw new BadRequestException("Task is empty.");
     }
+
     Task task = new Task(
         LocalDateTime.now().withNano(0),
         taskName.trim(),
@@ -55,11 +56,23 @@ public class TodoListServiceImpl implements TodoListService {
 
   @Override
   public TaskDto getTask(Long taskId) {
-    if (taskId == null || taskId < 1) {
-      LOGGER.error("TaskId parameter is negative or Null");
-      throw new BadRequestException("TaskId bad.");
-    }
+    checkId(taskId);
+
     Task task = (Task) genericDao.get(Task.class, taskId);
     return TaskMapper.taskToDto(task);
+  }
+
+  @Override
+  public void deleteTask(Long taskId) {
+    checkId(taskId);
+
+    genericDao.delete(taskId);
+  }
+
+  private static void checkId(Long taskId) {
+    if (taskId == null || taskId < 0) {
+      LOGGER.error("TaskId parameter is negative or Null: {}", taskId);
+      throw new BadRequestException("TaskId bad.");
+    }
   }
 }

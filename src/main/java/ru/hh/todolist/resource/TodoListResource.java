@@ -2,6 +2,7 @@ package ru.hh.todolist.resource;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
@@ -37,7 +38,6 @@ public class TodoListResource {
     return todoListService.add(taskName);
   }
 
-
   @GET
   @Path("/get/{id}")
   @Produces("application/json")
@@ -46,8 +46,17 @@ public class TodoListResource {
     return todoListService.getTask(taskId);
   }
 
+  @DELETE
+  @Path("/delete/{id}")
+  @Produces("application/json")
+  public void deleteTask(@PathParam(value = "id") Long taskId) {
+    LOGGER.info("DELETE deleteTask: {}", taskId);
+    todoListService.deleteTask(taskId);
+  }
+
+
   @PATCH
-  @Path("/add")
+  @Path("/update")
   @Produces("application/json")
   public TaskDto updateTask(@QueryParam(value = "id") Long taskId) {
     LOGGER.info("PATCH updateTask: id:{}", taskId);

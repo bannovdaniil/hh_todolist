@@ -12,4 +12,6 @@ public interface TodoListService {
   TaskDto update(Long taskId);
 
   TaskDto getTask(Long taskId);
+
+  void deleteTask(Long taskId);
 }

@@ -30,4 +30,13 @@ public class GenericDao<T> {
         sessionFactory.getCurrentSession().get(clazz, taskId)
     );
   }
+
+  public void delete(final Long taskId) {
+    transactionHelper.inTransaction(() ->
+        sessionFactory.getCurrentSession().createQuery(
+                "DELETE from Task as t WHERE t.id = :taskId")
+            .setParameter("taskId", taskId)
+            .executeUpdate()
+    );
+  }
 }
