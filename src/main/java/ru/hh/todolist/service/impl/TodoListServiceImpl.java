@@ -45,11 +45,6 @@ public class TodoListServiceImpl implements TodoListService {
   }
 
   @Override
-  public TaskDto update(Long taskId) {
-    return null;
-  }
-
-  @Override
   public TaskDto getTask(Long taskId) {
     checkId(taskId);
 
@@ -73,10 +68,28 @@ public class TodoListServiceImpl implements TodoListService {
     return genericDao.getAll(taskStatus);
   }
 
+  @Override
+  public TaskDto update(Long taskId, String taskName, String status) {
+    checkId(taskId);
+    Task task = (Task) genericDao.get(Task.class, taskId);
+    TaskStatus taskStatus = TaskStatus.fromString(status);
+    if (taskStatus != null) {
+      task.setTaskStatus(taskStatus);
+    }
+    if (taskName != null && !taskName.isBlank()) {
+      task.setTaskName(taskName);
+    }
+    genericDao.save(task);
+
+    return TaskMapper.taskToDto(task);
+  }
+
   private static void checkId(Long taskId) {
     if (taskId == null || taskId < 0) {
       LOGGER.error("TaskId parameter is negative or Null: {}", taskId);
       throw new BadRequestException("TaskId bad.");
     }
   }
+
+
 }

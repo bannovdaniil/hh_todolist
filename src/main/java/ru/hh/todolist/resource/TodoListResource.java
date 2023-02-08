@@ -66,9 +66,12 @@ public class TodoListResource {
   @PATCH
   @Path("/update/{id}")
   @Produces("application/json")
-  public TaskDto updateTask(@QueryParam(value = "id") Long taskId) {
-    LOGGER.info("PATCH updateTask: id:{}", taskId);
-    return todoListService.update(taskId);
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  public TaskDto updateTask(@PathParam(value = "id") Long taskId,
+                            @FormParam(value = "task") String taskName,
+                            @FormParam(value = "status") String status) {
+    LOGGER.info("PATCH updateTask: id:{}, status:{}, taskName:{}", taskId, status, taskName);
+    return todoListService.update(taskId, taskName, status);
   }
 
 }

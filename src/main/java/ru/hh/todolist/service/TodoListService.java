@@ -7,7 +7,7 @@ import java.util.List;
 public interface TodoListService {
   TaskDto add(String taskName);
 
-  TaskDto update(Long taskId);
+  TaskDto update(Long taskId, String taskName, String status);
 
   TaskDto getTask(Long taskId);
 

@@ -82,22 +82,27 @@
 			"response": []
 		},
 		{
-			"name": "AddTask Copy",
+			"name": "UpdateTask #2 name + status",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
 							"key": "task",
-							"value": "first",
+							"value": "editTask",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "WORK",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/add",
+					"raw": "http://localhost:8080/api/v1/update/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -106,7 +111,72 @@
 					"path": [
 						"api",
 						"v1",
-						"add"
+						"update",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateTask #2 name only",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "task",
+							"value": "only name",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/update/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateTask #2 only status",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "status",
+							"value": "COMPLETED",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/update/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"5"
 					]
 				}
 			},
@@ -139,7 +209,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/getAll?status=ACTIVE",
+					"raw": "http://localhost:8080/api/v1/getAll?status=WORK",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,7 +223,7 @@
 					"query": [
 						{
 							"key": "status",
-							"value": "ACTIVE"
+							"value": "WORK"
 						}
 					]
 				}
