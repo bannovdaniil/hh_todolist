@@ -25,7 +25,7 @@ public class TodoListServiceImpl implements TodoListService {
       throw new BadRequestException("Task is empty.");
     }
     Task task = new Task(
-        LocalDateTime.now(),
+        LocalDateTime.now().withNano(0),
         taskName.trim(),
         TaskStatus.ACTIVE
     );

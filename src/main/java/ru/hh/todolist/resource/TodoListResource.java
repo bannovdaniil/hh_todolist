@@ -5,11 +5,16 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import org.slf4j.Logger;
 import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.service.TodoListService;
+import ru.hh.todolist.service.impl.TodoListServiceImpl;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 @Path("/api/v1")
 public class TodoListResource {
+  public static final Logger LOGGER = getLogger(TodoListServiceImpl.class);
   private final TodoListService todoListService;
 
   @Inject
@@ -21,6 +26,7 @@ public class TodoListResource {
   @Path("/add")
   @Produces("application/json")
   public TaskDto addTask(@QueryParam(value = "task") String taskName) {
+    LOGGER.info("GET addTask: {}", taskName);
     return todoListService.add(taskName);
   }
 

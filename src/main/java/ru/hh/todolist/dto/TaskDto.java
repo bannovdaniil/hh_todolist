@@ -1,10 +1,13 @@
 package ru.hh.todolist.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import ru.hh.todolist.config.Constants;
 import ru.hh.todolist.model.TaskStatus;
 
 import java.time.LocalDateTime;
 
 public class TaskDto {
+  @JsonFormat(pattern = Constants.DATE_TIME_STRING)
   private LocalDateTime taskTime;
   private String taskName;
   private TaskStatus taskStatus;

@@ -21,16 +21,8 @@ public class Task {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public LocalDateTime getTaskTime() {
     return taskTime;
-  }
-
-  public void setTaskTime(LocalDateTime taskTime) {
-    this.taskTime = taskTime;
   }
 
   public String getTaskName() {
