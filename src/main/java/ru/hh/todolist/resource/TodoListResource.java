@@ -5,8 +5,8 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -17,7 +17,10 @@ import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.service.TodoListService;
 import ru.hh.todolist.service.impl.TodoListServiceImpl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -30,6 +33,22 @@ public class TodoListResource {
   public TodoListResource(TodoListService todoListService) {
     this.todoListService = todoListService;
   }
+
+  @GET
+  @Path("/index.html")
+  public String getIndexPage() throws IOException {
+    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    InputStream is = classloader.getResourceAsStream("index.html");
+    Scanner sc = new Scanner(is);
+    StringBuilder sb = new StringBuilder();
+    while (sc.hasNext()) {
+      sb.append(sc.nextLine()).append("\n");
+    }
+    sc.close();
+    is.close();
+    return sb.toString();
+  }
+
 
   @POST
   @Path("/add")
@@ -63,7 +82,7 @@ public class TodoListResource {
     todoListService.deleteTask(taskId);
   }
 
-  @PATCH
+  @PUT
   @Path("/update/{id}")
   @Produces("application/json")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
