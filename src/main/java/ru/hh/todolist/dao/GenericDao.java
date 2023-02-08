@@ -3,7 +3,11 @@ package ru.hh.todolist.dao;
 import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import ru.hh.todolist.dto.TaskDto;
+import ru.hh.todolist.entity.TaskStatus;
 import ru.hh.todolist.utils.TransactionHelper;
+
+import java.util.List;
 
 @Repository
 public class GenericDao<T> {
@@ -39,4 +43,22 @@ public class GenericDao<T> {
             .executeUpdate()
     );
   }
+
+  public List<TaskDto> getAll(TaskStatus taskStatus) {
+    return transactionHelper.inTransaction(() ->
+        sessionFactory.getCurrentSession().createQuery(
+                "Select t from Task as t WHERE t.taskStatus = :taskStatus")
+            .setParameter("taskStatus", taskStatus)
+            .list()
+    );
+  }
+
+  public List<TaskDto> getAll() {
+    return transactionHelper.inTransaction(() ->
+        sessionFactory.getCurrentSession().createQuery(
+                "Select t from Task as t")
+            .list()
+    );
+  }
+
 }

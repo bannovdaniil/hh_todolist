@@ -45,11 +45,6 @@ public class TodoListServiceImpl implements TodoListService {
   }
 
   @Override
-  public List<TaskDto> getAll() {
-    return null;
-  }
-
-  @Override
   public TaskDto update(Long taskId) {
     return null;
   }
@@ -67,6 +62,15 @@ public class TodoListServiceImpl implements TodoListService {
     checkId(taskId);
 
     genericDao.delete(taskId);
+  }
+
+  @Override
+  public List<TaskDto> getAllTask(String status) {
+    TaskStatus taskStatus = TaskStatus.fromString(status);
+    if (taskStatus == null) {
+      return genericDao.getAll();
+    }
+    return genericDao.getAll(taskStatus);
   }
 
   private static void checkId(Long taskId) {

@@ -7,11 +7,11 @@ import java.util.List;
 public interface TodoListService {
   TaskDto add(String taskName);
 
-  List<TaskDto> getAll();
-
   TaskDto update(Long taskId);
 
   TaskDto getTask(Long taskId);
 
   void deleteTask(Long taskId);
+
+  List<TaskDto> getAllTask(String status);
 }

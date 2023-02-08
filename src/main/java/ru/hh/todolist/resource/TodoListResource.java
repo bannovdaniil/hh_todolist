@@ -17,6 +17,8 @@ import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.service.TodoListService;
 import ru.hh.todolist.service.impl.TodoListServiceImpl;
 
+import java.util.List;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Path("/api/v1")
@@ -46,17 +48,23 @@ public class TodoListResource {
     return todoListService.getTask(taskId);
   }
 
+  @GET
+  @Path("/getAll")
+  @Produces("application/json")
+  public List<TaskDto> getAllTask(@QueryParam(value = "status") String status) {
+    LOGGER.info("GET getAllTask: {}", status);
+    return todoListService.getAllTask(status);
+  }
+
   @DELETE
   @Path("/delete/{id}")
-  @Produces("application/json")
   public void deleteTask(@PathParam(value = "id") Long taskId) {
     LOGGER.info("DELETE deleteTask: {}", taskId);
     todoListService.deleteTask(taskId);
   }
 
-
   @PATCH
-  @Path("/update")
+  @Path("/update/{id}")
   @Produces("application/json")
   public TaskDto updateTask(@QueryParam(value = "id") Long taskId) {
     LOGGER.info("PATCH updateTask: id:{}", taskId);
