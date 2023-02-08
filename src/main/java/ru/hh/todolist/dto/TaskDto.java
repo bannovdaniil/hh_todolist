@@ -7,15 +7,28 @@ import ru.hh.todolist.entity.TaskStatus;
 import java.time.LocalDateTime;
 
 public class TaskDto {
+  private Long id;
   @JsonFormat(pattern = Constants.DATE_TIME_STRING)
   private LocalDateTime taskTime;
   private String taskName;
   private TaskStatus taskStatus;
 
-  public TaskDto(LocalDateTime taskTime, String taskName, TaskStatus taskStatus) {
+  public TaskDto() {
+  }
+
+  public TaskDto(Long id, LocalDateTime taskTime, String taskName, TaskStatus taskStatus) {
+    this.id = id;
     this.taskTime = taskTime;
     this.taskName = taskName;
     this.taskStatus = taskStatus;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public LocalDateTime getTaskTime() {

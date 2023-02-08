@@ -8,15 +8,20 @@ import java.util.List;
 
 public class TaskMapper {
   public static Task dtoToTask(TaskDto taskDto) {
-    return new Task(taskDto.getTaskTime(),
+    return new Task(
+        taskDto.getTaskTime(),
         taskDto.getTaskName(),
-        taskDto.getTaskStatus());
+        taskDto.getTaskStatus()
+    );
   }
 
   public static TaskDto taskToDto(Task task) {
-    return new TaskDto(task.getTaskTime(),
+    return new TaskDto(
+        task.getId(),
+        task.getTaskTime(),
         task.getTaskName(),
-        task.getTaskStatus());
+        task.getTaskStatus()
+    );
   }
 
   public static List<TaskDto> taskListToDtoList(List<Task> tasks) {

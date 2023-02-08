@@ -35,6 +35,10 @@ public class Task {
     this.taskStatus = taskStatus;
   }
 
+  public Long getId() {
+    return id;
+  }
+
   public LocalDateTime getTaskTime() {
     return taskTime;
   }
