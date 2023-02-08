@@ -9,4 +9,7 @@ public interface TodoListService {
 
   List<TaskDto> getAll();
 
+  TaskDto update(Long taskId);
+
+  TaskDto getTask(Long taskId);
 }

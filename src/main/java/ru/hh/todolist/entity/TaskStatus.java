@@ -1,4 +1,4 @@
-package ru.hh.todolist.model;
+package ru.hh.todolist.entity;
 
 public enum TaskStatus {
   ACTIVE,

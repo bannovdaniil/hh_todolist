@@ -1,7 +1,7 @@
 package ru.hh.todolist.mapper;
 
 import ru.hh.todolist.dto.TaskDto;
-import ru.hh.todolist.model.Task;
+import ru.hh.todolist.entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;

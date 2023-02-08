@@ -2,7 +2,7 @@ package ru.hh.todolist.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.hh.todolist.config.Constants;
-import ru.hh.todolist.model.TaskStatus;
+import ru.hh.todolist.entity.TaskStatus;
 
 import java.time.LocalDateTime;
 
