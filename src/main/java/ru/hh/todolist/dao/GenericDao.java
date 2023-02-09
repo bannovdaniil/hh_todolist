@@ -47,7 +47,7 @@ public class GenericDao<T> {
   public List<TaskDto> getAll(TaskStatus taskStatus) {
     return transactionHelper.inTransaction(() ->
         sessionFactory.getCurrentSession().createQuery(
-                "Select t from Task as t WHERE t.taskStatus = :taskStatus")
+                "Select t from Task as t WHERE t.taskStatus = :taskStatus ORDER BY t.id")
             .setParameter("taskStatus", taskStatus)
             .list()
     );
@@ -56,7 +56,7 @@ public class GenericDao<T> {
   public List<TaskDto> getAll() {
     return transactionHelper.inTransaction(() ->
         sessionFactory.getCurrentSession().createQuery(
-                "Select t from Task as t")
+                "SELECT t FROM Task as t ORDER BY t.id")
             .list()
     );
   }
