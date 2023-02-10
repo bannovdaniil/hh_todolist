@@ -2,8 +2,19 @@
 
 ## ToDo List
 
-Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres
+Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + Docker
 
+## Как запустить
+
+- Зайти в папку с проектом и выполнить:
+
+`
+mvn clean install -DskipTests
+
+docker-compose build
+
+docker-compose up
+`
 #### port:
 
 8080
