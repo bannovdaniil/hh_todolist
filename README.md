@@ -6,15 +6,12 @@
 
 ## Как запустить
 
-- Зайти в папку с проектом и выполнить:
+**Зайти в папку с проектом и выполнить:**
 
-`
-mvn clean install -DskipTests
+- mvn clean install -DskipTests
+- docker-compose build
+- docker-compose up
 
-docker-compose build
-
-docker-compose up
-`
 #### port:
 
 8080
