@@ -14,19 +14,20 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import ru.hh.todolist.dto.TaskDto;
+import ru.hh.todolist.entity.TaskStatus;
 import ru.hh.todolist.service.TodoListService;
-import ru.hh.todolist.service.impl.TodoListServiceImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Path("/api/v1")
 public class TodoListResource {
-  public static final Logger LOGGER = getLogger(TodoListServiceImpl.class);
+  public static final Logger LOGGER = getLogger(TodoListService.class);
   private final TodoListService todoListService;
 
   @Inject
@@ -70,9 +71,9 @@ public class TodoListResource {
   @GET
   @Path("/getAll")
   @Produces("application/json")
-  public List<TaskDto> getAllTask(@QueryParam(value = "status") String status) {
-    LOGGER.info("GET getAllTask: {}", status);
-    return todoListService.getAllTask(status);
+  public List<TaskDto> getAllTask(@QueryParam(value = "status") TaskStatus taskStatus) {
+    LOGGER.info("GET getAllTask: {}", taskStatus);
+    return todoListService.getAllTask(Optional.ofNullable(taskStatus));
   }
 
   @DELETE
@@ -88,9 +89,9 @@ public class TodoListResource {
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   public TaskDto updateTask(@PathParam(value = "id") Long taskId,
                             @FormParam(value = "task") String taskName,
-                            @FormParam(value = "status") String status) {
-    LOGGER.info("PATCH updateTask: id:{}, status:{}, taskName:{}", taskId, status, taskName);
-    return todoListService.update(taskId, taskName, status);
+                            @FormParam(value = "status") TaskStatus taskStatus) {
+    LOGGER.info("PATCH updateTask: id:{}, status:{}, taskName:{}", taskId, taskStatus, taskName);
+    return todoListService.update(taskId, taskName, Optional.ofNullable(taskStatus));
   }
 
 }

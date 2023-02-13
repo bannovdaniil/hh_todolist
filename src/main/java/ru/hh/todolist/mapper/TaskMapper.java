@@ -7,14 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskMapper {
-  public static Task dtoToTask(TaskDto taskDto) {
-    return new Task(
-        taskDto.getTaskTime(),
-        taskDto.getTaskName(),
-        taskDto.getTaskStatus()
-    );
-  }
-
   public static TaskDto taskToDto(Task task) {
     return new TaskDto(
         task.getId(),
