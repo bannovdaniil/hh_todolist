@@ -17,11 +17,8 @@ import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.entity.TaskStatus;
 import ru.hh.todolist.service.TodoListService;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -34,22 +31,6 @@ public class TodoListResource {
   public TodoListResource(TodoListService todoListService) {
     this.todoListService = todoListService;
   }
-
-  @GET
-  @Path("/index.html")
-  public String getIndexPage() throws IOException {
-    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-    InputStream is = classloader.getResourceAsStream("index.html");
-    Scanner sc = new Scanner(is);
-    StringBuilder sb = new StringBuilder();
-    while (sc.hasNext()) {
-      sb.append(sc.nextLine()).append("\n");
-    }
-    sc.close();
-    is.close();
-    return sb.toString();
-  }
-
 
   @POST
   @Path("/add")

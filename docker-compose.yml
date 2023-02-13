@@ -1,5 +1,17 @@
 version: '3.8'
 services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.23.3-alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/www/html:/var/www/html
+    depends_on:
+      - todolist-service
+
   # Main
   todolist-service:
     build: .

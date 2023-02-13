@@ -2,23 +2,31 @@
 
 ## ToDo List
 
-Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + Docker
+Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + nginx + Docker
 
 ## Как запустить
 
 **Зайти в папку с проектом и выполнить:**
 
-- mvn clean install -DskipTests
+- mvn clean install
 - docker-compose build
 - docker-compose up
 
-#### port:
 
-8080
+#### Nginx:
+##### port:
+- 80
+
+**GET http://localhost/** - после запуска контейнера страница для демонстрации работы.
+
+##### Файл конфигурации:
+./nginx/conf.d/app.conf
+##### Index page:
+./nginx/www/html/
 
 #### Endpoints:
-
-**GET http://localhost:8080/api/v1/index.html** - страница для демонстрации работы.
+##### port:
+- 8080
 
 **POST http://localhost:8080/api/v1/add** - добавляет новую задачу в базу
 
