@@ -1,7 +1,8 @@
-﻿<html>
+﻿<html> 
 <head>
+<meta charset=utf-8>
 <title>ToDo List</title>
-<!--author>Bannov Daniil</author-->
+<!--author>Bannov Daniil v0.001alfa</author-->
 <script src="https://code.jquery.com/jquery-1.6.4.js"></script>
 <style>
 div{
@@ -168,7 +169,7 @@ function editTask(n){
 	getTask(n);
 
     $.getJSON('http://localhost:8080/api/v1/get/'+n, function(data) {
-        var taskname = data.taskName.replace(/\"/g, '&quot;');
+        var taskname = escapeHtml( data.taskName);
 var as ="selected";
 var cs ="";
 var ws ="";
@@ -255,7 +256,7 @@ function getTask(n){
 
         var text = `ID: ${data.id}<br>
                     Create time: ${data.taskTime}<br>
-                    Task name: ${data.taskName}<br>
+                    Task name: ${escapeHtml(data.taskName)}<br>
                     Status: ${data.taskStatus}<br>`
 
 
@@ -278,7 +279,7 @@ function getAllTask(){
                     <span class="col">${data[i].id}</span>
                     <span class="col">${data[i].taskTime.replace("T", " ")}</span>
                     <span class="col">${data[i].taskStatus}</span>
-                    <span class="colname">${data[i].taskName} </span>
+                    <span class="colname">${escapeHtml(data[i].taskName)} </span>
                     <span class="col">
                     <button class="but" id="id${data[i].id}" type="button" OnClick="getTask(${data[i].id});">Show[${data[i].id}]</button>
                     <button class="but" id="delete${data[i].id}" type="button" OnClick="deleteTask(${data[i].id});">Delete[${data[i].id}]</button>
@@ -305,7 +306,7 @@ function getAllStatusTask(status){
                     <span class="col">${data[i].id}</span>
                     <span class="col">${data[i].taskTime.replace("T", " ")}</span>
                     <span class="col">${data[i].taskStatus}</span>
-                    <span class="colname">${data[i].taskName} </span>
+                    <span class="colname">${escapeHtml(data[i].taskName)} </span>
                     <span class="col">
                     <button class="but" id="id${data[i].id}" type="button" OnClick="getTask(${data[i].id});">Show[${data[i].id}]</button>
                     <button class="but" id="delete${data[i].id}" type="button" OnClick="deleteTask(${data[i].id});">Delete[${data[i].id}]</button>
@@ -316,7 +317,16 @@ function getAllStatusTask(status){
         $(".displayall").html(text);
     });
 }
-    </script>
+    
+function escapeHtml(text){
+ return text
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+</script>
 
 <script>
 getAllTask();
