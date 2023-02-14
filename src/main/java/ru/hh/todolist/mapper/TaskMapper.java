@@ -3,7 +3,6 @@ package ru.hh.todolist.mapper;
 import ru.hh.todolist.dto.TaskDto;
 import ru.hh.todolist.entity.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskMapper {
@@ -17,10 +16,6 @@ public class TaskMapper {
   }
 
   public static List<TaskDto> taskListToDtoList(List<Task> tasks) {
-    List<TaskDto> taskDtoList = new ArrayList<>();
-    for (var task : tasks) {
-      taskDtoList.add(taskToDto(task));
-    }
-    return taskDtoList;
+    return tasks.stream().map(TaskMapper::taskToDto).toList();
   }
 }

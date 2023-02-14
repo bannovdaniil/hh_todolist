@@ -54,17 +54,16 @@ public class TodoListService {
   }
 
   public List<TaskDto> getAllTask(Optional<TaskStatus> taskStatus) {
-    if (taskStatus.isPresent()) {
-      return TaskMapper.taskListToDtoList(taskDao.getAll(taskStatus.get()));
-    }
-    return TaskMapper.taskListToDtoList(taskDao.getAll());
+    return TaskMapper.taskListToDtoList(
+        taskStatus
+            .map(taskDao::getAll)
+            .orElseGet(taskDao::getAll)
+    );
   }
 
   public TaskDto update(Long taskId, String taskName, Optional<TaskStatus> taskStatus) {
     Task task = taskDao.get(taskId);
-    if (taskStatus.isPresent()) {
-      task.setTaskStatus(taskStatus.get());
-    }
+    taskStatus.ifPresent(task::setTaskStatus);
     if (!StringUtils.isBlank(taskName)) {
       task.setTaskName(taskName);
     }
@@ -72,4 +71,5 @@ public class TodoListService {
 
     return TaskMapper.taskToDto(task);
   }
+
 }
