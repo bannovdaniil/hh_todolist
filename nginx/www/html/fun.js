@@ -1,4 +1,4 @@
-﻿function getAddTask() {
+function getAddTask() {
     var text = `<form id="addform" method="POST" name="saveForm" style="display:inline!important; margin: 0; padding: 0;">
 		Task Name: <input type="text" value="" name = "task"><br>
 	<br><br>

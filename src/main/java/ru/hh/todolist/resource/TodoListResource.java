@@ -1,6 +1,7 @@
 package ru.hh.todolist.resource;
 
 import jakarta.inject.Inject;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
@@ -41,12 +42,11 @@ public class TodoListResource {
     return todoListService.add(taskName);
   }
 
-  @GET
-  @Path("/get/{id}")
-  @Produces("application/json")
-  public TaskDto getTask(@PathParam(value = "id") Long taskId) {
-    LOGGER.info("GET getTask: {}", taskId);
-    return todoListService.getTask(taskId);
+  private static void checkId(Long taskId) {
+    if (taskId == null || taskId < 0) {
+      LOGGER.error("TaskId parameter is negative or Null: {}", taskId);
+      throw new BadRequestException("TaskId bad.");
+    }
   }
 
   @GET
@@ -57,10 +57,20 @@ public class TodoListResource {
     return todoListService.getAllTask(Optional.ofNullable(taskStatus));
   }
 
+  @GET
+  @Path("/get/{id}")
+  @Produces("application/json")
+  public TaskDto getTask(@PathParam(value = "id") Long taskId) {
+    LOGGER.info("GET getTask: {}", taskId);
+    checkId(taskId);
+    return todoListService.getTask(taskId);
+  }
+
   @DELETE
   @Path("/delete/{id}")
   public void deleteTask(@PathParam(value = "id") Long taskId) {
     LOGGER.info("DELETE deleteTask: {}", taskId);
+    checkId(taskId);
     todoListService.deleteTask(taskId);
   }
 
@@ -72,7 +82,7 @@ public class TodoListResource {
                             @FormParam(value = "task") String taskName,
                             @FormParam(value = "status") TaskStatus taskStatus) {
     LOGGER.info("PATCH updateTask: id:{}, status:{}, taskName:{}", taskId, taskStatus, taskName);
+    checkId(taskId);
     return todoListService.update(taskId, taskName, Optional.ofNullable(taskStatus));
   }
-
 }

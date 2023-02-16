@@ -64,7 +64,7 @@ public class TodoListService {
   public TaskDto update(Long taskId, String taskName, Optional<TaskStatus> taskStatus) {
     Task task = taskDao.get(taskId);
     taskStatus.ifPresent(task::setTaskStatus);
-    if (!StringUtils.isBlank(taskName)) {
+    if (StringUtils.isNotBlank(taskName)) {
       task.setTaskName(taskName);
     }
     taskDao.save(task);
