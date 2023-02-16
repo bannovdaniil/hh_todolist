@@ -1,6 +1,6 @@
-# hh.ru домашняя по Spring
+# Simple ToDo List
 
-## ToDo List
+### hh.ru домашняя по Spring
 
 Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + nginx + Docker
 
