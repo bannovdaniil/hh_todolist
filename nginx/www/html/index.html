@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset=utf-8>
+    <title>ToDo List</title>
+    <!--author>Bannov Daniil v0.002 alfa</author-->
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/fun.js"></script>
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="displayall"></div>
+    <div class="buttondiv">
+        <button class="showall" type="button" OnClick="getAllTask();">Show All</button>
+        <button class="showAct" type="button" OnClick="getAllStatusTask('ACTIVE');">Show ACTIVE</button>
+        <button class="showwork" type="button" OnClick="getAllStatusTask('WORK');">Show WORK</button>
+        <button class="showcoml" type="button" OnClick="getAllStatusTask('COMPLETED');">Show COMPLETED</button>
+        <span style="margin-left:300px; text-align: right;">
+            <button class="addtask" type="button" OnClick="getAddTask();">Add Task</button>
+        </span>
+    </div>
+    <div class="taskpanel"></div>
+</div>
+<div class="editpanel"></div>
+
+<script>
+    getAllTask();
+
+</script>
+</body>

@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.23.3-alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/www/html:/var/www/html
+    depends_on:
+      - todolist-service
+
+  # Main
+  todolist-service:
+    build: .
+    container_name: main_server
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      todo-db:
+        condition: service_healthy
+
+    environment:
+      - WAIT_HOSTS=todo-db:5432
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://todo-db:5432/todo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  # база для MAIn
+  todo-db:
+    image: postgres:14.5-alpine
+    container_name: todo_db
+    restart: always
+    volumes:
+      - /var/lib/postgresql/data/ 
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    ports:
+      - "6580:5432"
+    # переменные окружения
+    environment:
+      POSTGRES_DB: todo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  

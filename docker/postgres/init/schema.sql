@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tasks
+(
+    task_id       BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    creation_time TIMESTAMP WITHOUT TIME ZONE,
+    task_name     VARCHAR(250) NOT NULL,
+    task_status   VARCHAR(9) NOT NULL
+);

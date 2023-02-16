@@ -1,0 +1,14 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class tasks {
+   creation_time: timestamp
+   task_name: varchar(250)
+   task_status: varchar(9)
+   task_id: bigint
+}
+
+@enduml
