@@ -1,14 +1,16 @@
-version: '3.8'
+version: "3.8"
 services:
-  nginx:
-    container_name: nginx
-    image: nginx:1.23.3-alpine
+  # Client
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: src/client/Dockerfile
     restart: always
     ports:
       - 80:80
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/www/html:/var/www/html
     depends_on:
       - todolist-service
 
@@ -18,7 +20,7 @@ services:
     container_name: main_server
     restart: always
     ports:
-      - "8080:8080"
+      - 8080:8080
     depends_on:
       todo-db:
         condition: service_healthy
@@ -29,24 +31,23 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
 
-  # база для MAIn
+  # Database
   todo-db:
     image: postgres:14.5-alpine
     container_name: todo_db
     restart: always
     volumes:
-      - /var/lib/postgresql/data/ 
+      - /var/lib/postgresql/data/
       - ./docker/postgres/init:/docker-entrypoint-initdb.d
     ports:
-      - "6580:5432"
+      - 6580:5432
     # переменные окружения
     environment:
       POSTGRES_DB: todo
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
-  
