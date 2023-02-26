@@ -4,6 +4,8 @@
 
 Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + nginx + Docker
 
+![snapshot](http://https://raw.githubusercontent.com/bannovdaniil/hh_todolist/snapshot.jpg)
+
 ## Как запустить
 
 **Зайти в папку с проектом и выполнить:**
@@ -11,7 +13,6 @@
 - mvn clean install
 - docker-compose build
 - docker-compose up
-
 
 #### Nginx:
 ##### port:
@@ -86,4 +87,4 @@ json с данными созданной задачи.
 
 ### _Схема Базы данных проекта_
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/bannovdaniil/hh_todolist/develop/uml/scheme.puml?new)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/bannovdaniil/hh_todolist/uml/scheme.puml?new)
