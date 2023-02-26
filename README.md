@@ -4,7 +4,7 @@
 
 Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + nginx + Docker
 
-![snapshot](http://https://raw.githubusercontent.com/bannovdaniil/hh_todolist/snapshot.jpg)
+<img src="https://raw.githubusercontent.com/bannovdaniil/hh_todolist/main/uml/snapshot.jpg" width="640" target="_blank"/>
 
 ## Как запустить
 
@@ -87,4 +87,4 @@ json с данными созданной задачи.
 
 ### _Схема Базы данных проекта_
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/bannovdaniil/hh_todolist/uml/scheme.puml?new)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/bannovdaniil/hh_todolist/main/uml/scheme.puml?new)
