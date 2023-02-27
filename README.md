@@ -4,6 +4,8 @@
 
 Простой планировщик заданий на Spring + Jersey + Hibernate + Postgres + nginx + Docker
 
+Фронтенд реализован: [Бекен Сарсенбаев](https://github.com/Beken-S)
+
 <img src="https://raw.githubusercontent.com/bannovdaniil/hh_todolist/main/uml/snapshot.jpg" width="640" target="_blank"/>
 
 ## Как запустить
